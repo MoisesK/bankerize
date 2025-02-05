@@ -1,19 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Integration\Proposal;
 
-use App\Proposal\Domain\Contracts\ProposalRepository;
-use App\Proposal\Domain\Entity\Customer;
+use DateTime;
+use PHPUnit\Framework\TestCase;
 use App\Proposal\Domain\Entity\Payment;
+use App\Proposal\Domain\Entity\Customer;
 use App\Proposal\Domain\Entity\Proposal;
 use App\Proposal\Domain\Enum\ProposalStatuses;
-use App\Proposal\Domain\UseCase\CreateProposal\CreateProposal;
-use App\Proposal\Domain\UseCase\CreateProposal\InputData;
-use App\Proposal\Domain\UseCase\MarkProposalCreated\MarkProposalCreated;
 use App\Shared\Infra\Exceptions\ValidationException;
+use App\Proposal\Domain\Contracts\ProposalRepository;
 use App\Shared\Infra\Services\ProposalApi\ProposalApi;
+use App\Proposal\Domain\UseCase\CreateProposal\InputData;
+use App\Proposal\Domain\UseCase\CreateProposal\CreateProposal;
+use App\Proposal\Domain\UseCase\MarkProposalCreated\MarkProposalCreated;
 use App\Proposal\Domain\UseCase\MarkProposalCreated\InputData as MarkProposalCreatedInputData;
-use PHPUnit\Framework\TestCase;
 
 class ProposalTest extends TestCase
 {
@@ -25,12 +28,12 @@ class ProposalTest extends TestCase
         $proposalRepo = app()->make(ProposalRepository::class);
         $proposal = new Proposal(
             customer: new Customer(
-                name: 'Jorginho', 
-                cpf: '01234567890', 
-                birthDate: new \DateTime('2000-07-10'),
+                name: 'Jorginho',
+                cpf: '01234567890',
+                birthDate: new DateTime('2000-07-10'),
                 email: 'jorgin@email.com'
-            ), 
-            payment: new Payment('1000', 'teste@teste.com') 
+            ),
+            payment: new Payment('1000', 'teste@teste.com')
         );
 
         $proposalRepo->create($proposal);
@@ -41,9 +44,9 @@ class ProposalTest extends TestCase
         $this->assertEquals($proposal->customer->birthDate->format('Y-m-d'), $savedProposal->customer->birthDate->format('Y-m-d'));
         $this->assertEquals($proposal->payment->amount, $savedProposal->payment->amount);
         $this->assertEquals($proposal->payment->pixKey, $savedProposal->payment->pixKey);
-        $this->assertEquals($proposal->number, $savedProposal->number);        
-        $this->assertEquals(ProposalStatuses::PENDING, $savedProposal->status);        
-        $this->assertEquals($proposal->status, $savedProposal->status);        
+        $this->assertEquals($proposal->number, $savedProposal->number);
+        $this->assertEquals(ProposalStatuses::PENDING, $savedProposal->status);
+        $this->assertEquals($proposal->status, $savedProposal->status);
     }
 
     public function testItShouldThrowValidationExceptionWhenInvalidCpfProvided(): void
@@ -53,15 +56,15 @@ class ProposalTest extends TestCase
         $this->expectExceptionCode('VALIDATION_ERROR');
 
         $useCase = app()->make(CreateProposal::class);
-        
+
         $proposal = new Proposal(
             customer: new Customer(
-                name: 'Jorginho', 
-                cpf: '1223456543', 
-                birthDate: new \DateTime('2000-07-10'),
+                name: 'Jorginho',
+                cpf: '1223456543',
+                birthDate: new DateTime('2000-07-10'),
                 email: 'jorgin@email.com'
-            ), 
-            payment: new Payment('1000', 'teste@teste.com') 
+            ),
+            payment: new Payment('1000', 'teste@teste.com')
         );
 
         $useCase->execute(new InputData($proposal));
@@ -74,15 +77,15 @@ class ProposalTest extends TestCase
         $this->expectExceptionCode('VALIDATION_ERROR');
 
         $useCase = app()->make(CreateProposal::class);
-        
+
         $proposal = new Proposal(
             customer: new Customer(
-                name: 'Jorginho', 
-                cpf: '01234567890', 
-                birthDate: new \DateTime('2000-07-10'),
+                name: 'Jorginho',
+                cpf: '01234567890',
+                birthDate: new DateTime('2000-07-10'),
                 email: 'jorgin.com'
-            ), 
-            payment: new Payment('1000', 'teste@teste.com') 
+            ),
+            payment: new Payment('1000', 'teste@teste.com')
         );
 
         $useCase->execute(new InputData($proposal));
@@ -97,12 +100,12 @@ class ProposalTest extends TestCase
 
         $proposal = new Proposal(
             customer: new Customer(
-                name: 'Jorginho', 
-                cpf: '01234567890', 
-                birthDate: new \DateTime('2000-07-10'),
+                name: 'Jorginho',
+                cpf: '01234567890',
+                birthDate: new DateTime('2000-07-10'),
                 email: 'jorginho@gmail.com'
-            ), 
-            payment: new Payment('1000', 'teste@teste.com') 
+            ),
+            payment: new Payment('1000', 'teste@teste.com')
         );
 
         $proposalRepo->create($proposal);
@@ -122,8 +125,8 @@ class ProposalTest extends TestCase
         $this->assertEquals($proposal->customer->birthDate->format('Y-m-d'), $savedProposal->customer->birthDate->format('Y-m-d'));
         $this->assertEquals($proposal->payment->amount, $savedProposal->payment->amount);
         $this->assertEquals($proposal->payment->pixKey, $savedProposal->payment->pixKey);
-        $this->assertEquals($proposal->number, $savedProposal->number);        
-        $this->assertEquals(ProposalStatuses::CREATED, $savedProposal->status);        
-        $this->assertEquals($proposal->status, $savedProposal->status);        
+        $this->assertEquals($proposal->number, $savedProposal->number);
+        $this->assertEquals(ProposalStatuses::CREATED, $savedProposal->status);
+        $this->assertEquals($proposal->status, $savedProposal->status);
     }
 }

@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use Illuminate\Console\Command;
+use PhpAmqpLib\Message\AMQPMessage;
 use App\Shared\Domain\Adapters\Contracts\LogSystem;
 use App\Shared\Domain\Adapters\Contracts\MessageBroker;
-use App\Shared\Domain\Adapters\MessageBroker\ConsumerHandlers;
 use App\Shared\Domain\Adapters\MessageBroker\ConsumerBase;
-use LogicException;
-use Illuminate\Console\Command;
-use PhpAmqpLib\Exception\AMQPChannelClosedException;
-use PhpAmqpLib\Message\AMQPMessage;
+use App\Shared\Domain\Adapters\MessageBroker\ConsumerHandlers;
 
 final class ConsumeQueue extends Command
 {

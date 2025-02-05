@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Proposal\Domain\Entity;
 
 use App\Shared\Domain\EntityBase;
@@ -11,7 +13,7 @@ use App\Shared\Domain\EntityBase;
 class Payment extends EntityBase
 {
     public function __construct(
-        protected string $amount, 
+        protected string $amount,
         protected string $pixKey
     ) {
     }

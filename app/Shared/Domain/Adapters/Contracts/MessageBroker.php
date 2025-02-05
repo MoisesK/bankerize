@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Domain\Adapters\Contracts;
 
-use App\Shared\Domain\Adapters\MessageBroker\QueueMessage;
 use Closure;
+use App\Shared\Domain\Adapters\MessageBroker\QueueMessage;
 
 interface MessageBroker
 {

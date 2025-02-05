@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Infra\Traits;
 
-use App\Shared\Infra\Exceptions\ValidationException;
+use Throwable;
 use Illuminate\Http\JsonResponse;
+use App\Shared\Infra\Exceptions\ValidationException;
 
 trait JsonResponsable
 {
@@ -56,7 +59,7 @@ trait JsonResponsable
             return response()->json($response, $status);
         }
 
-        if ($data instanceof \Throwable) {
+        if ($data instanceof Throwable) {
             $response = [
                 'status'        => false,
                 'response'      => $data->getMessage(),

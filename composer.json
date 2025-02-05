@@ -30,7 +30,8 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.1",
         "phpunit/phpunit": "^11.0.1",
-        "dg/bypass-finals": "^1.3"
+        "dg/bypass-finals": "^1.3",
+        "friendsofphp/php-cs-fixer": "^3"
     },
     "autoload": {
         "psr-4": {
@@ -53,7 +54,9 @@
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-        ]
+        ],
+        "phpcs:fix": "php-cs-fixer fix --config=.php-cs-fixer.php --allow-risky=yes",
+        "phpcs:check": "php-cs-fixer fix --config=.php-cs-fixer.php --allow-risky=yes --diff --verbose --dry-run ."
     },
     "extra": {
         "laravel": {

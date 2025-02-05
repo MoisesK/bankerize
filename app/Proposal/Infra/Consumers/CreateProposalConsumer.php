@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Proposal\Infra\Consumers;
 
-use App\Proposal\Domain\Contracts\ProposalRepository;
-use App\Proposal\Domain\Entity\Customer;
+use DateTime;
 use App\Proposal\Domain\Entity\Payment;
+use App\Proposal\Domain\Entity\Customer;
 use App\Proposal\Domain\Entity\Proposal;
+use App\Proposal\Domain\Contracts\ProposalRepository;
 use App\Shared\Domain\Adapters\Contracts\MessageBroker;
 use App\Shared\Domain\Adapters\MessageBroker\ConsumerBase;
 use App\Shared\Domain\Adapters\MessageBroker\QueueMessage;
@@ -26,12 +29,12 @@ class CreateProposalConsumer extends ConsumerBase
         $data = $this->messageBody;
         $proposal = new Proposal(
             customer: new Customer(
-                name: $data['customer']['name'], 
-                cpf: $data['customer']['cpf'], 
-                birthDate: new \DateTime($data['customer']['birthDate']),
+                name: $data['customer']['name'],
+                cpf: $data['customer']['cpf'],
+                birthDate: new DateTime($data['customer']['birthDate']),
                 email: $data['customer']['email']
-            ), 
-            payment: new Payment($data['payment']['amount'], $data['payment']['pixKey']) 
+            ),
+            payment: new Payment($data['payment']['amount'], $data['payment']['pixKey'])
         );
 
         $this->repo->create($proposal);

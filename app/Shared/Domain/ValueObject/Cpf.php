@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Domain\ValueObject;
 
 use App\Shared\Domain\ValueObjectBase;
@@ -12,7 +14,7 @@ class Cpf extends ValueObjectBase
 {
     protected bool $isValid = false;
     protected string $number = '';
-    
+
     public function __construct(string $number)
     {
         $this->number = preg_replace('/\D/', '', $number);

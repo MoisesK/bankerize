@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Infra\Services\NotificationApi;
 
 use Illuminate\Support\Facades\Http;

@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Domain\Adapters\MessageBroker;
 
-use App\Shared\Domain\Adapters\Contracts\LogSystem;
-use App\Shared\Domain\Adapters\Contracts\MessageBroker;
 use Closure;
 use Exception;
+use Throwable;
 use PhpAmqpLib\Channel\AMQPChannel;
-use PhpAmqpLib\Exception\AMQPChannelClosedException;
-use PhpAmqpLib\Exception\AMQPRuntimeException;
 use PhpAmqpLib\Message\AMQPMessage;
 use PhpAmqpLib\Exchange\AMQPExchangeType;
+use PhpAmqpLib\Exception\AMQPRuntimeException;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
-use Throwable;
+use App\Shared\Domain\Adapters\Contracts\LogSystem;
+use PhpAmqpLib\Exception\AMQPChannelClosedException;
+use App\Shared\Domain\Adapters\Contracts\MessageBroker;
 
 final class RabbitMqAdapter implements MessageBroker
 {

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Proposal\Domain\Entity;
 
+use DateTimeInterface;
 use App\Shared\Domain\EntityBase;
 use App\Shared\Domain\ValueObject\Cpf;
 use App\Shared\Domain\ValueObject\Email;
-use DateTimeInterface;
 
 /**
  * @property string $name
@@ -16,7 +18,7 @@ class Customer extends EntityBase
 {
     public function __construct(
         protected string $name,
-        protected string|Cpf $cpf, 
+        protected string|Cpf $cpf,
         protected DateTimeInterface $birthDate,
         protected string|Email $email
     ) {

@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Infra\Adapters\LogSystem;
 
-use App\Shared\Domain\Adapters\Contracts\LogSystem;
 use Illuminate\Support\Facades\Log;
+use App\Shared\Domain\Adapters\Contracts\LogSystem;
 
 final class LaravelLog implements LogSystem
 {

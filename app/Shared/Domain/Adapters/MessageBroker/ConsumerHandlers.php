@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Domain\Adapters\MessageBroker;
 
 use App\Proposal\Infra\Consumers\CreateProposalConsumer;
-use App\Proposal\Infra\Consumers\MarkProposalCreatedConsumer;
 use App\Proposal\Infra\Consumers\NotifyCustomerConsumer;
+use App\Proposal\Infra\Consumers\MarkProposalCreatedConsumer;
 
 final class ConsumerHandlers
 {

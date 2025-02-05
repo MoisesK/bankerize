@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Proposal\Domain\UseCase\CreateProposal;
 
+use App\Shared\Infra\Exceptions\ValidationException;
 use App\Proposal\Domain\Contracts\ProposalRepository;
 use App\Shared\Domain\Adapters\Contracts\MessageBroker;
 use App\Shared\Domain\Adapters\MessageBroker\QueueMessage;
-use App\Shared\Infra\Exceptions\ValidationException;
 
 class CreateProposal
 {

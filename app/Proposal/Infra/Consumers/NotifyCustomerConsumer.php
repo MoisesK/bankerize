@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Proposal\Infra\Consumers;
 
 use App\Proposal\Domain\Contracts\ProposalRepository;
-use App\Proposal\Domain\UseCase\MarkProposalCreated\InputData;
-use App\Proposal\Domain\UseCase\MarkProposalCreated\MarkProposalCreated;
 use App\Shared\Domain\Adapters\Contracts\MessageBroker;
 use App\Shared\Domain\Adapters\MessageBroker\ConsumerBase;
 use App\Shared\Domain\Adapters\MessageBroker\QueueMessage;

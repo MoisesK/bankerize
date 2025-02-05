@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Console\Commands\ConsumeQueue;
-use App\Shared\Infra\Middleware\ResponseToJson;
 use Illuminate\Foundation\Application;
+use App\Shared\Infra\Middleware\ResponseToJson;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 

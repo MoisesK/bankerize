@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Domain\Adapters\MessageBroker;
 
-use App\Shared\Infra\Exceptions\ValidationException;
 use Throwable;
 use DateTimeImmutable;
 use PhpAmqpLib\Message\AMQPMessage;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
-use App\Shared\Domain\Adapters\Contracts\LogSystem;
 use Doctrine\DBAL\Exception\DriverException;
 use PhpAmqpLib\Connection\AbstractConnection;
 use PhpAmqpLib\Exception\AMQPRuntimeException;
 use PhpAmqpLib\Exception\AMQPProtocolException;
+use App\Shared\Domain\Adapters\Contracts\LogSystem;
+use App\Shared\Infra\Exceptions\ValidationException;
 use PhpAmqpLib\Exception\AMQPConnectionClosedException;
 
 abstract class ConsumerBase

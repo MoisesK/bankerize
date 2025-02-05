@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit;
 
-use App\Shared\Domain\ValueObject\Cpf;
 use PHPUnit\Framework\TestCase;
+use App\Shared\Domain\ValueObject\Cpf;
 
 class CpfTest extends TestCase
 {

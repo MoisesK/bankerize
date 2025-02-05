@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Shared\Infra\Exceptions;
 
-use App\Shared\Domain\Exceptions\Error;
 use Exception;
+use App\Shared\Domain\Exceptions\Error;
 
 abstract class ExceptionBase extends Exception implements Error
 {
