@@ -9,7 +9,8 @@ services:
         ports:
             - 8001:80
         volumes:
-          - ./:/app
+            - ./:/app
+            - ./.docker/consumer/php-fpm.conf:/etc/supervisor/conf.d/php-fpm.conf
         networks:
             - bankerize-network
         extra_hosts:
@@ -17,9 +18,9 @@ services:
         environment:
           - ENABLE_XDEBUG=true
 
-    mariadb:
-        image: mariadb:latest
-        container_name: bankerize-mariadb
+    mysql:
+        image: mysql:8.0
+        container_name: bankerize-mysql
         command: [
             '--character-set-server=utf8mb4',
             '--collation-server=utf8mb4_unicode_ci',
@@ -37,7 +38,8 @@ services:
         networks:
         - bankerize-network
         volumes:
-        - ./.docker/data:/var/lib/mysql
+        - ./.docker/mysql/dbdata:/var/lib/mysql
+
 
     redis:
         image: redis:6.2.6
@@ -53,19 +55,24 @@ services:
         - api
 
     rabbitmq:
-        image: rabbitmq:3-management
+        image: rabbitmq:3.11-management
         container_name: bankerize-rabbitmq
         hostname: 'rabbitmq-dev'
+        restart: always
         ports:
-        - "5672:5672"
-        - "15672:15672"
+            - "5672:5672"
+            - "15672:15672"
+        environment:
+            - RABBITMQ_DEFAULT_USER=guest
+            - RABBITMQ_DEFAULT_PASS=guest     
+            - RABBITMQ_NODENAME=rabbitmq
         volumes:
-        - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
-        - ./.docker/rabbitmq/log/:/var/log/rabbitmq
+            - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
+            - ./.docker/rabbitmq/log/:/var/log/rabbitmq
         networks:
-        - bankerize-network
+            - bankerize-network
         depends_on:
-        - api
+            - api
 
 networks:
     bankerize-network:
