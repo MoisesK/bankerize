@@ -8,4 +8,5 @@ enum ProposalStatuses: int
 {
     case PENDING = 1;
     case CREATED = 2;
+    case NOTIFYED = 3;
 }

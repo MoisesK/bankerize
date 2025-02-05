@@ -35,6 +35,8 @@ class CreateProposalController extends Controller
             'pix_key' => 'string|required'
         ]);
 
+        $payloadData['proposal_amount'] = preg_replace('/(\.\d+)/', '', (string)$payloadData['proposal_amount']);
+
         try {
             $this->useCase->execute(new InputData(new Proposal(
                 customer: new Customer($payloadData['name'], $payloadData['cpf'], new DateTimeImmutable($payloadData['birth_date']), $payloadData['email']),

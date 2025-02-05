@@ -29,6 +29,8 @@ class NotifyCustomerConsumer extends ConsumerBase
         $proposal = $this->repo->findById($data['id']);
 
         if (!$this->service->checkHttpStatus()) {
+            $this->logSystem->error('Notify api service is offline');
+
             $this->queueSystem->publish(new QueueMessage(
                 action: 'proposal-maded',
                 data: $proposal->toArray(),
@@ -39,6 +41,9 @@ class NotifyCustomerConsumer extends ConsumerBase
             ));
             return;
         }
+
+        $proposal->markNotify();
+        $this->repo->update($proposal);
 
     }
 }

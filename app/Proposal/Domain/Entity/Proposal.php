@@ -35,4 +35,9 @@ class Proposal extends EntityBase
     {
         $this->status = ProposalStatuses::CREATED;
     }
+
+    public function markNotify(): void
+    {
+        $this->status = ProposalStatuses::NOTIFYED;
+    }
 }

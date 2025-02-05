@@ -12,12 +12,8 @@ class MockNotificationApi implements NotificationApi
 
     public function checkHttpStatus(): bool
     {
-        $response = Http::get($this->baseUrl)->json();
+        $response = Http::post($this->baseUrl);
 
-        if (isset($response['status']) && $response['status'] === 'success') {
-            return true;
-        }
-
-        return false;
+        return $response->getStatusCode() === 204;
     }
 }

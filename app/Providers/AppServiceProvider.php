@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Shared\Infra\Services\NotificationApi\MockNotificationApi;
+use App\Shared\Infra\Services\NotificationApi\NotificationApi;
 use Illuminate\Support\ServiceProvider;
 use App\Shared\Domain\Adapters\Contracts\LogSystem;
 use App\Shared\Infra\Adapters\LogSystem\LaravelLog;
@@ -30,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Apis
         $this->app->singleton(ProposalApi::class, MockProposalApi::class);
+        $this->app->singleton(NotificationApi::class, MockNotificationApi::class);
     }
 
     /**

@@ -13,7 +13,7 @@ use App\Shared\Domain\EntityBase;
 class Payment extends EntityBase
 {
     public function __construct(
-        protected string $amount,
+        protected string|int $amount,
         protected string $pixKey
     ) {
     }

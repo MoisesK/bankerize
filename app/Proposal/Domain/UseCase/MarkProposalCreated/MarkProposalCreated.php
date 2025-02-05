@@ -21,14 +21,5 @@ class MarkProposalCreated
         $inputData->proposal->markCreated();
 
         $this->repository->update($inputData->proposal);
-
-        $this->queueSystem->publish(new QueueMessage(
-            action: 'proposal-created',
-            data: $inputData->proposal->toArray(),
-            options: [
-                "routingKey" => 'notify',
-                "exchangeName" => 'bankerize'
-            ]
-        ));
     }
 }
