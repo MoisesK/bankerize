@@ -1,5 +1,7 @@
 <?php
 
+use App\Console\Commands\ConsumeQueue;
+use App\Shared\Infra\Middleware\ResponseToJson;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,8 +15,12 @@ return Application::configure(basePath: dirname(__DIR__))
         apiPrefix: '/'
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->group('api', [
+            ResponseToJson::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
-    })->create();
+    })->withCommands([
+        ConsumeQueue::class
+    ])->create();
